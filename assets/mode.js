@@ -1,0 +1,4 @@
+/* Day / Night mode toggle (sun & moon), remembers the choice */
+(()=>{const root=document.documentElement,fx=document.getElementById('fxb'),b=document.createElement('button');b.className='btn-mono';b.id='mdb';b.type='button';fx.parentNode.insertBefore(b,fx);fx.parentNode.insertBefore(document.createTextNode(' '),fx);
+function set(m,save){root.setAttribute('data-bs-theme',m);b.innerHTML='<i class="bi bi-'+(m=='dark'?'sun':'moon-stars')+'"></i>';b.title=m=='dark'?'Light mode':'Dark mode';b.setAttribute('aria-label',b.title);const mt=document.querySelector('meta[name=theme-color]');if(mt)mt.setAttribute('content',m=='dark'?'#0b0d1c':(getComputedStyle(root).getPropertyValue('--c1').trim()||'#6d5dfc'));if(save)try{localStorage.setItem('mode',m)}catch(e){}dispatchEvent(new Event('modechange'))}
+b.onclick=()=>set(root.getAttribute('data-bs-theme')=='dark'?'light':'dark',true);set(root.getAttribute('data-bs-theme')||'light',false)})();

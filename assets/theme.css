@@ -1,0 +1,15 @@
+/* Design refresh: floating pill navbar, orbit hero, gradient borders, footer */
+.glass-nav{top:14px!important;left:50%!important;right:auto!important;transform:translateX(-50%);width:min(1180px,94%);border-radius:60px;padding:6px 14px;background:rgba(255,255,255,.34);-webkit-backdrop-filter:saturate(190%) blur(28px);backdrop-filter:saturate(190%) blur(28px);border:1px solid rgba(255,255,255,.6);box-shadow:0 10px 40px rgba(31,35,64,.12),inset 0 1px 0 rgba(255,255,255,.75)}
+@media(max-width:991px){.glass-nav{border-radius:26px}}
+.hero h1{font-size:clamp(2.4rem,5.2vw,4.3rem);font-weight:800;line-height:1.1;letter-spacing:-1px}.hero .lead{font-size:1.2rem;max-width:520px}
+.scene:before,.scene:after{content:"";position:absolute;border-radius:50%;pointer-events:none}.scene:before{width:380px;height:380px;border:2px dashed rgba(var(--c1r),.35);animation:sp2 32s linear infinite}.scene:after{width:520px;height:520px;border:1px solid rgba(var(--c2r),.28);animation:sp2 50s linear infinite reverse}
+@media(max-width:575px){.scene:after{display:none}.scene:before{width:300px;height:300px}}
+.gl:hover{border-color:transparent;background:linear-gradient(rgba(255,255,255,.92),rgba(255,255,255,.92)) padding-box,linear-gradient(135deg,var(--c1),var(--c2),#ff4fd8) border-box}
+#s1,#s2,#s3,#s4{background:var(--g);-webkit-background-clip:text;color:transparent;display:inline-block}
+.container.py-5{padding-block:4.5rem!important}.sec{font-size:clamp(1.8rem,3.5vw,2.6rem)}
+.btn-grad{border-radius:50px;box-shadow:0 8px 24px rgba(var(--c1r),.35)}.av.lg{width:170px;height:170px;font-size:64px;margin-bottom:18px}
+.ft{padding:42px 0;margin-top:30px;border-top:1px solid rgba(var(--c1r),.15);background:rgba(255,255,255,.55);backdrop-filter:blur(10px)}.ft .logo{font-size:30px}
+
+.btn-mono{width:40px;height:40px;border-radius:50%;border:1.5px solid #111;background:#fff;color:#111;display:inline-grid;place-items:center;font-size:17px;padding:0;vertical-align:middle;transition:.25s;cursor:pointer}.btn-mono:hover{background:#111;color:#fff;transform:rotate(-8deg) scale(1.08)}
+.uchip{position:relative}.uchip.has:after{content:"";position:absolute;top:2px;inset-inline-end:2px;width:11px;height:11px;border-radius:50%;background:#ef4444;border:2px solid #fff}
+.rep{background:rgba(var(--c1r),.08);border-radius:14px;padding:10px 14px}
