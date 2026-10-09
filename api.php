@@ -1,9 +1,20 @@
+<?php include 'db.php'; ?>
 <?php
 const ADMIN_MAIL='info@build3.com',MAIL_FROM='no-reply@build3.com';
 $isA=($_GET['s']??'')=='a';$rm=$isA&&($_COOKIE['b3rm']??'')=='1';$life=($isA&&$rm)?2592000:0;ini_set('session.gc_maxlifetime',2592000);session_name($isA?'B3ADMIN':'B3SITE');
 session_set_cookie_params(['lifetime'=>$life,'path'=>'/','httponly'=>true,'samesite'=>'Lax','secure'=>!empty($_SERVER['HTTPS'])]);
 session_start();if($rm)setcookie(session_name(),session_id(),['expires'=>time()+$life,'path'=>'/','httponly'=>true,'samesite'=>'Lax','secure'=>!empty($_SERVER['HTTPS'])]);header('Content-Type:application/json');error_reporting(0);
-try{$db=new PDO('mysql:host=localhost;dbname=build3;charset=utf8mb4','root','',[PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,PDO::ATTR_DEFAULT_FETCH_MODE=>PDO::FETCH_ASSOC]);}catch(Exception $x){die('{"error":"db"}');}
+
+try {
+    // تم ربط الاتصال هنا بمتغيرات ملف db.php الجديد المتصل بـ Railway
+    $db = new PDO("mysql:host=$host;dbname=$database;charset=utf8mb4;port=$port", $username, $password, [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+    ]);
+} catch(Exception $x) {
+    die('{"error":"db"}');
+}
+
 if(!$db->query("SHOW TABLES LIKE 'chat'")->fetch())$db->exec("CREATE TABLE chat(id INT AUTO_INCREMENT PRIMARY KEY,user_id INT NOT NULL,sender ENUM('client','admin') NOT NULL,admin_id INT NULL,body TEXT,file VARCHAR(200) NULL,seen TINYINT NOT NULL DEFAULT 0,created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,INDEX(user_id,id),FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE)");
 if(!$db->query("SHOW COLUMNS FROM messages LIKE 'reply'")->fetch())$db->exec("ALTER TABLE messages ADD reply TEXT NULL, ADD replied_at DATETIME NULL, ADD reply_seen TINYINT NOT NULL DEFAULT 1");
 if(!$db->query("SHOW COLUMNS FROM comments LIKE 'approved'")->fetch()){$db->exec("ALTER TABLE comments ADD approved TINYINT NOT NULL DEFAULT 0");$db->exec("UPDATE comments SET approved=1");}
